@@ -1,0 +1,30 @@
+Architecture Flow:
++------------+         +------------------+         +---------------+
+|   Client   | ----->  |   API Gateway    | ----->  | Load Balancer |
++------------+         +------------------+         +---------------+
+                                 |  
+                        +---------------------+
+                        |  AWS Lambda        |
+                        |  (Shorten & Fetch) |
+                        +---------------------+
+                                 |
+            +--------------------------------------+
+            |        Database (MySQL on RDS)     |
+            | (Stores Short URL <-> Long URL)    |
+            +--------------------------------------+
+                                 |
+                        +----------------+
+                        | Redis Cache     |
+                        | (AWS ElastiCache) |
+                        +----------------+
+
+Shorten URL Flow:
+Client → API → Python Code (Generate Short Code) → Database (Save URL) → Response (Short URL)
+
+
+Redirect URL Flow:
+Client → API → Check Cache (Redis) → If Found, Redirect
+                          ↓
+                    If Not Found
+                          ↓
+                 Fetch from Database → Redirect
