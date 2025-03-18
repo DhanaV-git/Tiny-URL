@@ -1,0 +1,5 @@
+Here is the table :
+
+| id  | short_code | original_url                      | created_at | expires_at | access_count |
+|-----|-----------|----------------------------------|------------|------------|--------------|
+| 1   | 5n6et7uf  | https://leetdesign.com/...      | 2025-03-17 | 2030-03-17 | 104          |
